@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="con" path="MULE_LIB/org.mule.connectors/mule-file-connector/1.3.4"/>
+	<classpathentry kind="con" path="MULE_LIB/org.mule.connectors/mule-ftp-connector/1.5.4"/>
 	<classpathentry kind="con" path="org.mule.tooling.API_SPEC_LIB/b33f157e-308e-40ff-b566-2592b2e9de02/projetofinalv2/1.2.0"/>
 	<classpathentry kind="con" path="MULE_LIB/org.mule.modules/mule-apikit-module/1.5.2"/>
 	<classpathentry kind="con" path="MULE_LIB/org.mule.connectors/mule-sockets-connector/1.2.1"/>

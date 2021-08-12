@@ -1,17 +1,23 @@
 {
   "configs": [
-    "projetofinalv2.xml"
+    "global.xml",
+    "implemetacao/implementacao-find-media.xml",
+    "projetofinalv2.xml",
+    "implemetacao/implementacao-find.xml"
   ],
   "secureProperties": [],
   "redeploymentEnabled": true,
   "name": "com.mycompany:projetofinalcompassov2.0:1.0.0-SNAPSHOT",
   "minMuleVersion": "4.3.0",
-  "requiredProduct": "MULE",
+  "requiredProduct": "MULE_EE",
   "classLoaderModelLoaderDescriptor": {
     "id": "mule",
     "attributes": {
       "exportedPackages": [],
       "exportedResources": [
+        "global.xml",
+        "implemetacao/implementacao-find-media.xml",
+        "implemetacao/implementacao-find.xml",
         "log4j2.xml",
         "projetofinalv2.xml"
       ]

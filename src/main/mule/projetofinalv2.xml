@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd ">
+<mule xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd ">
     <http:listener-config name="projetofinalv2-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="8081" />
     </http:listener-config>
@@ -124,90 +124,7 @@ output application/json
         </error-handler>
     </flow>
     <flow name="get:\findPredictTimeWeek:projetofinalv2-config">
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  cidade: "Pelotas, RS",
-  condicao_tempo: "rain",
-  nome_cidade: "Pelotas",
-  previsao: [
-    {
-      date: "26/07",
-      weekday: "Seg",
-      max: 18,
-      min: 10,
-      condition: "rain"
-    }, 
-    {
-      date: "27/07",
-      weekday: "Ter",
-      max: 10,
-      min: 5,
-      condition: "rain"
-    }, 
-    {
-      date: "28/07",
-      weekday: "Qua",
-      max: 7,
-      min: 4,
-      condition: "rain"
-    }, 
-    {
-      date: "29/07",
-      weekday: "Qui",
-      max: 11,
-      min: 3,
-      condition: "clear_day"
-    }, 
-    {
-      date: "30/07",
-      weekday: "Sex",
-      max: 13,
-      min: 2,
-      condition: "clear_day"
-    }, 
-    {
-      date: "31/07",
-      weekday: "Sáb",
-      max: 17,
-      min: 6,
-      condition: "clear_day"
-    }, 
-    {
-      date: "01/08",
-      weekday: "Dom",
-      max: 14,
-      min: 8,
-      condition: "cloudly_day"
-    }, 
-    {
-      date: "02/08",
-      weekday: "Seg",
-      max: 14,
-      min: 10,
-      condition: "rain"
-    }, 
-    {
-      date: "03/08",
-      weekday: "Ter",
-      max: 17,
-      min: 11,
-      condition: "rain"
-    }, 
-    {
-      date: "04/08",
-      weekday: "Qua",
-      max: 14,
-      min: 8,
-      condition: "cloudly_day"
-    }
-  ]
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
+		<flow-ref doc:name="Flow Reference" doc:id="c3af6369-5701-42c6-90ad-c8caa3dc1b28" name="implementation-main"/>
     </flow>
     <flow name="get:\findPredictTimeWeek\media:projetofinalv2-config">
         <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">

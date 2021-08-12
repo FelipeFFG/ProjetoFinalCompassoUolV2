@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ftp="http://www.mulesoft.org/schema/mule/ftp" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ftp http://www.mulesoft.org/schema/mule/ftp/current/mule-ftp.xsd">
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="3b9aa929-3a51-4d25-ad2d-c606974cba08" >
+		<http:request-connection protocol="HTTPS" host="anypoint.mulesoft.com" port="443" />
+	</http:request-config>
+	<ftp:config name="FTP_Config" doc:name="FTP Config" doc:id="5f000a7c-0d1d-4d48-a66f-f58beb72b081" >
+		<ftp:connection host="files.000webhost.com" username="projetofinalcompassouol" password="projetocompasso" connectionTimeout="30" responseTimeout="30"/>
+	</ftp:config>
+</mule>
