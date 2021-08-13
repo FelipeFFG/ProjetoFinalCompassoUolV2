@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="implementation-find-data-main" doc:id="d68042a1-4bfa-405f-990f-094db13d88f6" >
+		<flow-ref doc:name="Flow Buscar dados Tratados" doc:id="41c80f0b-8343-454a-84da-7110ae0102a7" name="implementation-BuscarDados-Tratamento"/>
+		<flow-ref doc:name="Flow Calcula data" doc:id="9530e700-ebfa-4d24-9c72-cd7c430f158e" name="implementation-find-data-calc"/>
+	</sub-flow>
+	<sub-flow name="implementation-find-data-calc" doc:id="25059d3f-fe2c-4791-af82-695e9e4096c3" >
+		<try doc:name="Try" doc:id="b586cc1e-fff9-4287-8c41-21a678846a19" >
+			<ee:transform doc:name="Calcula Data" doc:id="2e142680-5ca1-4b6a-b16b-3cea0f62ad0d">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+
+---
+
+vars.dadosFiltrados.previsao filter ((item, index) -> item.data == vars.Param_data)
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="f4eb5637-1a60-4f7c-92e3-86fbbaf0e0f8" >
+					<ee:transform doc:name="Transform Message" doc:id="5ab42a77-41ef-46d0-be28-b57d4e3d0554" >
+						<ee:message >
+							<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	mensagem: error.description
+}]]></ee:set-payload>
+						</ee:message>
+					</ee:transform>
+				</on-error-continue>
+			</error-handler>
+		</try>
+	</sub-flow>
+</mule>

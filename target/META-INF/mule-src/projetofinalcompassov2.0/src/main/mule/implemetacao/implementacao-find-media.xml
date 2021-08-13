@@ -49,6 +49,5 @@ output application/json
 				</on-error-continue>
 			</error-handler>
 		</try>
-		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="eb912e53-e1aa-4937-9bf0-947b39d19781" />
 	</sub-flow>
 </mule>

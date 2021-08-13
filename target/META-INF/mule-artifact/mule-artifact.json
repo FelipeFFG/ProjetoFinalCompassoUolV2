@@ -1,9 +1,13 @@
 {
   "configs": [
+    "implemetacao/implementation-find-clima.xml",
+    "implemetacao/implementacao-find-traducao.xml",
+    "implemetacao/implementation-find-semana.xml",
     "global.xml",
+    "implemetacao/implementation-find-data.xml",
     "implemetacao/implementacao-find-media.xml",
-    "projetofinalv2.xml",
-    "implemetacao/implementacao-find.xml"
+    "implemetacao/implementation-find-get.xml",
+    "projetofinalv2.xml"
   ],
   "secureProperties": [],
   "redeploymentEnabled": true,
@@ -17,7 +21,11 @@
       "exportedResources": [
         "global.xml",
         "implemetacao/implementacao-find-media.xml",
-        "implemetacao/implementacao-find.xml",
+        "implemetacao/implementacao-find-traducao.xml",
+        "implemetacao/implementation-find-clima.xml",
+        "implemetacao/implementation-find-data.xml",
+        "implemetacao/implementation-find-get.xml",
+        "implemetacao/implementation-find-semana.xml",
         "log4j2.xml",
         "projetofinalv2.xml"
       ]
