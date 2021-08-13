@@ -33,7 +33,7 @@ vars.dadosFiltrados
 	Estado : attributes.headers.Estado
 }]]]></http:headers>
 		</http:request>
-		<try doc:name="Copy_of_Try" doc:id="fec7a125-39f8-4c44-86b5-4852259513b4" >
+		<try doc:name="Try" doc:id="fec7a125-39f8-4c44-86b5-4852259513b4" >
 			<ee:transform doc:name="TrataDados" doc:id="97d40a68-67fa-472a-8a42-cd7d7fd25649" >
 				<ee:message >
 					<ee:set-payload ><![CDATA[%dw 2.0

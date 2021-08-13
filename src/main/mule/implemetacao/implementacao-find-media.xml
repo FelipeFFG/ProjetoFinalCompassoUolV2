@@ -1,5 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<sub-flow name="implementacao-find-media-main" doc:id="775aa09d-5cf1-44d4-bd56-a75fa63d2613" >
+		<flow-ref doc:name="Chama Buscar Dados e Calcula media" doc:id="431b805b-ed63-41d9-82c7-09fdfdf1e3f4" name="implementacao-find-media-calc"/>
+	</sub-flow>
+	<sub-flow name="implementacao-find-media-calc" doc:id="8a077d88-b231-44e6-bd80-316c89a2883c" >
+		<http:request method="GET" doc:name="BuscarDados" doc:id="5652f3aa-20f5-4c18-963f-155eb0781908" config-ref="HTTP_Request_configuration" path="/mocking/api/v1/sources/exchange/assets/b33f157e-308e-40ff-b566-2592b2e9de02/projetofinalv2/1.2.0/m/findPredictTimeWeek/media">
+			<http:headers><![CDATA[#[output application/json
+---
+{
+	NomeDaCidade : attributes.headers.NomeDaCidade,
+	Estado : attributes.headers.Estado
+}]]]></http:headers>
+		</http:request>
+		<try doc:name="Try" doc:id="28e0b5a7-7c02-47e7-91d2-2ce2f3c497b0" >
+			<ee:transform doc:name="Calcula media" doc:id="da08f7b9-71d5-47a7-a98c-26a21c5676d2">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+
+---
+{
+	previsao: payload.previsao map ( previsao , indexOfPrevisao ) -> {
+		data: previsao.date,
+		semana: previsao.weekday,
+		media: sum([previsao.max,previsao.min])/2
+	}
+}
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="ab2a04f4-8617-4d73-b53c-63d4702590b4" >
+					<ee:transform doc:name="Transform Message" doc:id="0865f073-4c48-4c7b-b3f0-961212a53502" >
+						<ee:message >
+							<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	mensagem: error.description
+}]]></ee:set-payload>
+						</ee:message>
+					</ee:transform>
+				</on-error-continue>
+			</error-handler>
+		</try>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="eb912e53-e1aa-4937-9bf0-947b39d19781" />
+	</sub-flow>
+</mule>
