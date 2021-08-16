@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="Implementation-find-filtragem-main" doc:id="b90b6ea1-0a2b-4c28-9a8f-ed2054e926ed" >
+		<flow-ref doc:name="Buscar dados Tratados" doc:id="4b36156c-b804-43b6-9cd4-bdc301011cb7" name="implementation-BuscarDados-Tratamento" />
+		<flow-ref doc:name="Filtragem Calc" doc:id="2dddf373-216a-45f7-bf6e-fc1dc17e5ab1" name="Implementation-find-filtragem-calc"/>
+	</sub-flow>
+	<sub-flow name="Implementation-find-filtragem-calc" doc:id="913bb514-6e2f-4f7e-bd52-2d250a7c887a" >
+		<try doc:name="Try" doc:id="d7bd0449-a2a8-430d-ab45-90284747d0d4" >
+			<ee:transform doc:name="Transformacao da Filtragem" doc:id="eed1fddc-a9ff-4bc7-a31b-9385373d50ce" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+
+
+fun filtragem(payload: Array)= do {
+    if(!isBlank(vars.Param_data) and !isBlank(vars.Param_clima) and !isBlank(vars.Param_semana))
+        payload filter ((item, index) -> item.data == vars.Param_data and upper(item.condicao) == upper(vars.Param_clima) and upper(item.semana) == upper(vars.Param_semana))
+    else
+    if (!isBlank(vars.Param_clima) and !isBlank(vars.Param_data))
+	    payload filter ((item, index) -> item.data == vars.Param_data and upper(item.condicao) == upper(vars.Param_clima))
+    else
+    if (!isBlank(vars.Param_clima) and !isBlank(vars.Param_semana))
+	    payload filter ((item, index) -> upper(item.semana) == upper(vars.Param_semana)  and upper(item.condicao) == upper(vars.Param_clima))
+    else
+    if (!isBlank(vars.Param_data))
+	    payload filter ((item, index) -> item.data == vars.Param_data)
+    else
+    if(!isBlank(vars.Param_clima))
+	    payload filter ((item, index) -> upper(item.condicao) == upper(vars.Param_clima))
+    else
+    if(!isBlank(vars.Param_semana))
+	    payload filter ((item, index) -> upper(item.semana) == upper(vars.Param_semana))
+    else
+        "Nenhuma previsao encontrada, há parametros em branco ou nullo"
+}
+
+---
+filtragem(payload)
+]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="42ec24f9-071e-4660-8af2-8c3d361e928b" >
+					<ee:transform doc:name="Transform Message" doc:id="4e4ad360-bbe5-4c64-aec4-2eb4373c3707" >
+						<ee:message >
+							<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	mensagem: error.description
+}]]></ee:set-payload>
+						</ee:message>
+					</ee:transform>
+				</on-error-continue>
+			</error-handler>
+		</try>
+	</sub-flow>
+</mule>

@@ -1,0 +1,72 @@
+[  
+    {
+    "data": "26/07",
+    "semana": "Seg",
+    "maxima": 18,
+    "minima": 10,
+    "condicao": "chuva"
+  },
+  {
+    "data": "27/07",
+    "semana": "Ter",
+    "maxima": 10,
+    "minima": 5,
+    "condicao": "chuva"
+  },
+  {
+    "data": "28/07",
+    "semana": "Qua",
+    "maxima": 7,
+    "minima": 4,
+    "condicao": "chuva"
+  },
+  {
+    "data": "29/07",
+    "semana": "Qui",
+    "maxima": 11,
+    "minima": 3,
+    "condicao": "Tempo Limpo"
+  },
+  {
+    "data": "30/07",
+    "semana": "Sex",
+    "maxima": 13,
+    "minima": 2,
+    "condicao": "Tempo Limpo"
+  },
+  {
+    "data": "31/07",
+    "semana": "Sáb",
+    "maxima": 17,
+    "minima": 6,
+    "condicao": "Tempo Limpo"
+  },
+  {
+    "data": "01/08",
+    "semana": "Dom",
+    "maxima": 14,
+    "minima": 8,
+    "condicao": "Tempo Nublado"
+  },
+  {
+    "data": "02/08",
+    "semana": "Seg",
+    "maxima": 14,
+    "minima": 10,
+    "condicao": "chuva"
+  },
+  {
+    "data": "03/08",
+    "semana": "Ter",
+    "maxima": 17,
+    "minima": 11,
+    "condicao": "chuva"
+  },
+  {
+    "data": "04/08",
+    "semana": "Qua",
+    "maxima": 14,
+    "minima": 8,
+    "condicao": "Tempo Nublado"
+  }
+]

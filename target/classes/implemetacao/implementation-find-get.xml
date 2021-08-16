@@ -7,29 +7,13 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<sub-flow name="implementation-find-get-main" doc:id="59b1e128-b7da-4a7b-a12e-995e142f20ad" >
 		<flow-ref doc:name="Flow seta variaveis" doc:id="ee3dca62-62bc-4eba-88ad-9bbaa2881d70" name="implementation-find-get-variaveis"/>
 		<choice doc:name="Choice" doc:id="a2736ffb-3d07-46ae-b1ed-5bb30b9ec15e" >
-			<when expression="#[vars.Param_data != null]">
-				<flow-ref doc:name="Flow de data" doc:id="671e8e86-ffbf-4c76-aebb-5d5639f030d5" name="implementation-find-data-main"/>
-			</when>
-			<when expression="#[vars.Param_semana != null]">
-				<flow-ref doc:name="Flow de semana" doc:id="d18693d0-bfde-46e9-be2b-8abfc5a0f07a" name="implementation-find-semana-main"/>
-			</when>
-			<when expression="#[vars.Param_clima != null]">
-				<flow-ref doc:name="Flow de clima" doc:id="7733533d-8d99-475b-8282-fa634e8f760e" name="implementation-find-clima-main"/>
+			<when expression="#[vars.Param_clima != null or vars.Param_semana != null or vars.Param_data != null]">
+				<flow-ref doc:name="Flow de filtragem" doc:id="7733533d-8d99-475b-8282-fa634e8f760e" name="Implementation-find-filtragem-main"/>
 			</when>
 			<otherwise >
 				<flow-ref doc:name="Flow de Traducao" doc:id="b3022857-98f6-4c16-a8b8-da58954d518b" name="implementation-find-traducao-main"/>
 			</otherwise>
 		</choice>
-	</sub-flow>
-	<sub-flow name="teste" doc:id="56442766-374e-4d5a-96d9-ee61ad8ffd3b" >
-		<ee:transform doc:name="Transform Message" doc:id="a921c930-6896-4e5c-8f36-e8e99be8e904" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/java
----
-vars]]></ee:set-payload>
-			</ee:message>
-		</ee:transform>
 	</sub-flow>
 	<sub-flow name="implementation-find-get-variaveis" doc:id="21893b69-e6fe-47ea-aef2-d9ae831eff46" >
 		<set-variable value="#[attributes.queryParams.data]" doc:name="Set Data" doc:id="1fd6043c-6464-4d53-9f07-c8e220124c0b" variableName="Param_data"/>

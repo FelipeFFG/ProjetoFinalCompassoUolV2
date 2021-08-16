@@ -1,10 +1,8 @@
 {
   "configs": [
-    "implemetacao/implementation-find-clima.xml",
     "implemetacao/implementacao-find-traducao.xml",
-    "implemetacao/implementation-find-semana.xml",
     "global.xml",
-    "implemetacao/implementation-find-data.xml",
+    "implemetacao/Implementation-find-filtragem.xml",
     "implemetacao/implementacao-find-media.xml",
     "implemetacao/implementation-find-get.xml",
     "projetofinalv2.xml"
@@ -19,13 +17,13 @@
     "attributes": {
       "exportedPackages": [],
       "exportedResources": [
+        "application-types.xml",
+        "examples/Filtragem-Meta.json",
         "global.xml",
         "implemetacao/implementacao-find-media.xml",
         "implemetacao/implementacao-find-traducao.xml",
-        "implemetacao/implementation-find-clima.xml",
-        "implemetacao/implementation-find-data.xml",
+        "implemetacao/Implementation-find-filtragem.xml",
         "implemetacao/implementation-find-get.xml",
-        "implemetacao/implementation-find-semana.xml",
         "log4j2.xml",
         "projetofinalv2.xml"
       ]
