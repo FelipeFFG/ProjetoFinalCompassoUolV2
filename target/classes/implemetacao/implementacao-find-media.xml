@@ -26,9 +26,9 @@ output application/json
 ---
 {
 	previsao: payload.previsao map ( previsao , indexOfPrevisao ) -> {
-		data: previsao.date,
-		semana: previsao.weekday,
-		media: sum([previsao.max,previsao.min])/2
+		data: payload.previsao.date,
+		semana: payload.previsao.weekday,
+		media: sum([payload.previsao.max,previsao.min])/2
 	}
 }
 ]]></ee:set-payload>

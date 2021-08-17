@@ -39,7 +39,11 @@ fun filtragem(payload: Array)= do {
 }
 
 ---
-filtragem(payload)
+
+if(!isEmpty(filtragem(payload)))
+	filtragem(payload)
+else
+	mensagem: "nao encontramos nenhum resultado com esse(es) parametros"
 ]]></ee:set-payload>
 				</ee:message>
 			</ee:transform>
